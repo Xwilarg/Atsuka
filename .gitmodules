@@ -1,0 +1,3 @@
+[submodule "Atsuka/Discord-Utils"]
+	path = Atsuka/Discord-Utils
+	url = https://github.com/Xwilarg/Discord-Utils
