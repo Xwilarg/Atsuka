@@ -8,10 +8,10 @@ namespace Atsuka
 {
     public class CommunicationModule : ModuleBase
     {
-        [Command("Info")]
+        [Command("Info"), Alias("Botinfo")]
         private async Task Info()
         {
-            await ReplyAsync("", false, Utils.GetBotInfo(Program.P.StartTime, "Atsuki", Program.P.client.CurrentUser));
+            await ReplyAsync("", false, Utils.GetBotInfo(Program.P.StartTime, "Atsuka", Program.P.client.CurrentUser));
         }
 
         [Command("Help")]
