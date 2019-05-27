@@ -114,6 +114,7 @@ namespace Atsuka
                     }
                     catch (Exception e)
                     { } // Bot don't have permissions to kick user
+                    await msg.DeleteAsync();
                 }
                 else
                     await msg.DeleteAsync();
