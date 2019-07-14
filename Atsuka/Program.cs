@@ -66,8 +66,15 @@ namespace Atsuka
             perspectiveApi = json.perspectiveToken;
 
             reportChan = null;
-            reportChanId = ulong.Parse((string)json.reportChan);
-            reportGuildId = ulong.Parse((string)json.guildId);
+            if (json.reportChan != null && json.guildId != null)
+            {
+                reportChanId = ulong.Parse((string)json.reportChan);
+                reportGuildId = ulong.Parse((string)json.guildId);
+            }
+            else
+            {
+                reportChanId = 0;
+            }
 
             await client.LoginAsync(TokenType.Bot, (string)json.token);
             StartTime = DateTime.Now;
@@ -83,7 +90,7 @@ namespace Atsuka
             int pos = 0;
             if (msg.Channel as ITextChannel == null)
             {
-                if (msg.Content.Length > 0)
+                if (msg.Content.Length > 0 && reportChanId != 0)
                 {
                     if (reportChan == null)
                         reportChan = client.GetGuild(reportGuildId).GetTextChannel(reportChanId);
@@ -112,14 +119,14 @@ namespace Atsuka
                             "You can come back when you'll be calmed");
                         bannedIds.Remove(msg.Author.Id);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     { } // Bot don't have permissions to kick user
                     await msg.DeleteAsync();
                 }
                 else
                     await msg.DeleteAsync();
             }
-            else if (await CheckMessage(msg.Content, msg.Author.ToString()))
+            else if (await CheckMessage(msg.Content, msg.Author.ToString()) && (await ((ITextChannel)msg.Channel).Guild.GetCurrentUserAsync()).GuildPermissions.ManageMessages)
             {
                 bannedIds.Add(arg.Author.Id);
                 await msg.Channel.SendMessageAsync("How rude of you, didn't we learn you to speak politely ?" + Environment.NewLine +
