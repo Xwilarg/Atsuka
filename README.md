@@ -9,7 +9,7 @@ Create a Keys folder need your executable<br/>
 Inside it, create a keys.txt file with the following values inside:
 - token: Bot token
 - perspectiveToken: Token from Google Perspective
-- googleAPIjson: Location of the JSON file used by Google Translate
+- googleAPIJson: Location of the JSON file used by Google Translate
 - reportChan (optional): Channel where messages are reported
 - guildId (optional): Guild where reportChan is
 <br/><br/>
